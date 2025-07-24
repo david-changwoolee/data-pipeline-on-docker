@@ -33,6 +33,5 @@ RUN wget https://repo1.maven.org/maven2/org/apache/spark/spark-hive_2.12/3.5.5/s
     mv spark-hive_2.12-3.5.5.jar ${SPARK_HOME}/jars
 
 RUN mkdir /tmp/spark-events
-
 WORKDIR /root/jupyter
 CMD ["jupyter", "notebook", "--allow-root", "--port", "9000", "--ip", "0.0.0.0"]
