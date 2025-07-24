@@ -34,15 +34,6 @@ RUN echo "export JAVA_HOME=${JAVA_HOME}" >> ${HADOOP_HOME}/etc/hadoop/hadoop-env
     echo "export HDFS_DATANODE_USER=root" >> ${HADOOP_HOME}/etc/hadoop/hadoop-env.sh && \
     echo "export HDFS_NAMENODE_USER=root" >> ${HADOOP_HOME}/etc/hadoop/hadoop-env.sh && \
     echo "export HDFS_SECONDARYNAMENODE_USER=root" >> ${HADOOP_HOME}/etc/hadoop/hadoop-env.sh
-#ENV HDFS_CONF_dfs_datanode_data_dir=file:///opt/hadoop/hdfs
-
-#RUN for user in hadoop hdfs yarn mapred hive; do \
-#        useradd -U -M -d /opt/hadoop/ --shell /bin/bash ${user}; \
-#    done && \
-#    for user in root hdfs yarn mapred hive; do \
-#        usermod -G hadoop ${user}; \
-#    done
-#RUN chgrp -R hadoop /opt/hadoop
 
 RUN ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa && \
     cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys && \
