@@ -32,6 +32,7 @@ RUN wget https://dlcdn.apache.org/spark/spark-3.5.5/spark-3.5.5-bin-hadoop3.tgz 
     tar zxvf spark-3.5.5-bin-hadoop3.tgz && \
     mv spark-3.5.5-bin-hadoop3 ${SPARK_HOME}
 RUN rm spark-3.5.5-bin-hadoop3.tgz
+RUN pip3 install virtualenv --break-system-packages
 
 ENV HADOOP_CONF_DIR=/opt/hadoop/etc/hadoop
 ENV YARN_CONF_DIR=/opt/hadoop/etc/hadoop
