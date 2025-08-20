@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import logging
 import sys
 from pprint import pprint
@@ -20,8 +18,8 @@ PATH_TO_PYTHON_BINARY = sys.executable
 
 
 with DAG(
-    dag_id="wiki",
-    schedule=None,
+    dag_id="stream_wiki",
+    schedule='*/1 * * * *',
     start_date=pendulum.datetime(2025, 8, 1, tz=pendulum.timezone("Asia/Seoul")),
     catchup=False,
     tags=["wiki"],
@@ -45,7 +43,7 @@ with DAG(
         log.warning("The virtalenv_python example task requires virtualenv, please install it.")
     else:
 
-        def callable_wiki():
+        def callable_stream_wiki():
             import re
             import time
             import json
@@ -63,7 +61,7 @@ with DAG(
                     )
             
             start_time = time.time()
-            duration = 5
+            duration = 50 
             url = 'https://stream.wikimedia.org/v2/stream/recentchange'
             headers = {'Accept': 'text/event-stream'}
             
@@ -94,11 +92,11 @@ with DAG(
             producer.close()
             pprint("Producer finished.")
 
-        virtualenv_task = PythonVirtualenvOperator(
-            task_id="virtualenv_python",
-            python_callable=callable_wiki,
+        stream_wiki = PythonVirtualenvOperator(
+            task_id="stream_wiki",
+            python_callable=callable_stream_wiki,
             requirements=["sseclient-py", "requests", "kafka-python"],
             system_site_packages=False,
         )
 
-        start >> print_context >> virtualenv_task >> end
+        start >> print_context >> stream_wiki >> end
