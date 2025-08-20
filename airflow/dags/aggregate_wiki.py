@@ -21,7 +21,7 @@ with DAG(
     'aggregate_wiki',
     default_args=default_args,
     description='aggregate_wiki',
-    schedule_interval=None,
+    schedule_interval='@hourly',
     start_date=pendulum.datetime(2025, 8, 1, tz="UTC"),
     catchup=False,
     tags=['wiki'],
