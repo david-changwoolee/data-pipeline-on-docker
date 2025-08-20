@@ -19,7 +19,7 @@ PATH_TO_PYTHON_BINARY = sys.executable
 
 with DAG(
     dag_id="stream_wiki",
-    schedule='*/1 * * * *',
+    schedule='* * * * *',
     start_date=pendulum.datetime(2025, 8, 1, tz=pendulum.timezone("Asia/Seoul")),
     catchup=False,
     tags=["wiki"],
