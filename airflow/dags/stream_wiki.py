@@ -62,7 +62,7 @@ with DAG(
             
             start_time = time.time()
             duration = 50 
-            url = 'https://stream.wikimedia.org/v2/stream/recentchange'
+            url = 'https://stream.wikimedia.org/v2/stream/mediawiki.recentchange'
             headers = {'Accept': 'text/event-stream'}
             
             response = requests.get(url, stream=True, headers=headers)
