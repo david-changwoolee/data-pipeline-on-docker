@@ -33,6 +33,7 @@ spark = SparkSession.builder \
       .config("spark.executor.memory", "1g") \
       .config("spark.executor.cores", "1") \
       .config("spark.executor.instances", "1") \
+      .config("spark.yarn.queue", "batch") \
       .config("spark.jars.packages", "org.apache.spark:spark-hive_2.12:3.5.5") \
       .enableHiveSupport() \
       .getOrCreate() 
