@@ -43,5 +43,8 @@
 	  <name>yarn.scheduler.minimum-allocation-vcores</name>
 	  <value>1</value>
   </property>
-  
+  <property>
+          <name>yarn.resourcemanager.scheduler.class</name>
+          <value>org.apache.hadoop.yarn.server.resourcemanager.scheduler.capacity.CapacityScheduler</value>
+  </property>
 </configuration>

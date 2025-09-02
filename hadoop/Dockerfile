@@ -42,9 +42,11 @@ RUN ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa && \
 COPY hadoop_conf/core-site.xml ${HADOOP_HOME}/etc/hadoop/core-site.xml
 COPY hadoop_conf/hdfs-site.xml ${HADOOP_HOME}/etc/hadoop/hdfs-site.xml
 COPY hadoop_conf/yarn-site.xml ${HADOOP_HOME}/etc/hadoop/yarn-site.xml
+COPY hadoop_conf/capacity-scheduler.xml ${HADOOP_HOME}/etc/hadoop/capacity-scheduler.xml
 RUN chmod +r ${HADOOP_HOME}/etc/hadoop/core-site.xml && \
     chmod +r ${HADOOP_HOME}/etc/hadoop/hdfs-site.xml && \
-    chmod +r ${HADOOP_HOME}/etc/hadoop/yarn-site.xml
+    chmod +r ${HADOOP_HOME}/etc/hadoop/yarn-site.xml && \
+    chmod +r ${HADOOP_HOME}/etc/hadoop/capacity-scheduler.xml
 
 EXPOSE 8088 9870 9864 19888 8042 8888
 
