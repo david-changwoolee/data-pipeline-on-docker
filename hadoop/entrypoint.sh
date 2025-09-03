@@ -13,6 +13,9 @@ hdfs dfs -chmod 755 /datalake/data/wiki
 hdfs dfs -mkdir -p /datalake/checkpoint/wiki
 hdfs dfs -chown spark:hdfs /datalake/checkpoint/wiki
 hdfs dfs -chmod 755 /datalake/checkpoint/wiki
+hdfs dfs -mkdir -p /datawarehouse/data/wiki
+hdfs dfs -chown spark:hdfs /datawarehouse/data/wiki
+hdfs dfs -chmod 755 /datawarehouse/data/wiki
 
 #hive entrypoint
 schematool -dbType mysql -initSchema
