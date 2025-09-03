@@ -15,10 +15,10 @@ def parse_args(execution_ts):
     date_str = execution_ts.split('.')[0]
     date_format = "%Y-%m-%dT%H:%M:%S"
     date = datetime.strptime(date_str, date_format) - timedelta(hours=1)
-    year = date.year
-    month = date.month
-    day = date.day
-    hour = date.hour
+    year = f"{date.year:04}"
+    month = f"{date.month:02}"
+    day = f"{date.day:02}"
+    hour = f"{date.hour:02}"
     print("date :", year, month, day, hour)
     return year, month, day, hour
 
@@ -40,13 +40,15 @@ spark = SparkSession.builder \
 
 spark.sql("use default")
 spark.sql("""create external table if not exists wiki (wiki string, count int)
-    partitioned by (timestamp string)
+    partitioned by (date int, hour int)
     stored as parquet
-    location 'hdfs://hadoop:9000/user/hive/warehouse/wiki'""")
+    location 'hdfs://hadoop:9000/datawarehouse/data/wiki'""")
 
-df = spark.read.parquet(f"hdfs://hadoop:9000/datalake/data/wiki/year={year}/month={month}/day={day}/hour={hour}/*.snappy.parquet")
+df = spark.read.parquet(f"hdfs://hadoop:9000/datalake/data/wiki/date={year}{month}{day}/hour={hour}/*.parquet")
 aggregated_df = df.groupBy('wiki').count().sort(desc('count')) \
-    .withColumn('timestamp', lit(f"{year:04d}{month:02d}{day:02d}_{hour:02d}")) \
+    .withColumn('date', lit(f"{year}{month}{day}")) \
+    .withColumn('hour', lit(f"{hour}")) \
     .limit(10)
+
 aggregated_df.show(truncate=False)
 aggregated_df.write.mode("overwrite").saveAsTable('wiki')
