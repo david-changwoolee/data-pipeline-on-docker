@@ -63,34 +63,41 @@ with DAG(
             start_time = time.time()
             duration = 50 
             url = 'https://stream.wikimedia.org/v2/stream/mediawiki.recentchange'
-            headers = {'Accept': 'text/event-stream'}
+            headers = {'Accept': 'text/event-stream', 'User-Agent': 'woo/1.0'}
             
-            response = requests.get(url, stream=True, headers=headers)
-            client = sseclient.SSEClient(response)
+            try:
+                response = requests.get(url, stream=True, headers=headers)
+                response.raise_for_status()
+                print(f'HTTP connection response code : {response.status_code}')
 
-            for _ in client.events():
-                data = json.loads(_.data)
-                domain = data.get('meta').get('domain')
-                p = re.compile('^[a-z]+.wikipedia.org$')
-                if p.match(domain) is not None:
-                    message = {'id' : data.get('id'),
+                client = sseclient.SSEClient(response)
+
+                for _ in client.events():
+                    data = json.loads(_.data)
+                    domain = data.get('meta').get('domain')
+                    p = re.compile('^[a-z]+.wikipedia.org$')
+                    if p.match(domain) is not None:
+                        message = {'id' : data.get('id'),
                                'wiki' : data.get('wiki'),
                                'timestamp' : data.get('timestamp'),
                                'bot' : data.get('bot')}
                     
-                    future = producer.send(kafka_topic, value=message)
-                    try:
-                        record_metadata = future.get(timeout=5)
-                        pprint(f"Successfully sent message to partition {record_metadata.partition} at offset {record_metadata.offset}")
-                    except Exception as e:
-                        pprint(f"Failed to send message: {e}")
+                        pprint(f"message : {message}")
+                        future = producer.send(kafka_topic, value=message)
+                        try:
+                            record_metadata = future.get(timeout=5)
+                            print(f"Successfully sent message to partition {record_metadata.partition} at offset {record_metadata.offset}")
+                        except Exception as e:
+                            print(f"Failed to send message: {e}")
                     
-                if time.time() - start_time > duration:
-                    break
+                    if time.time() - start_time > duration:
+                        break
+            except requests.exceptions.RequestException as e:
+                print(f"Request exception: {e}")
 
             producer.flush()
             producer.close()
-            pprint("Producer finished.")
+            print("Producer finished.")
 
         stream_wiki = PythonVirtualenvOperator(
             task_id="stream_wiki",
