@@ -37,7 +37,8 @@ with DAG(
         deploy_mode="cluster",
         conn_id="spark",  # Airflow의 Spark connection 설정 (Airflow UI > Admin > Connections)
         application_args=["--execution-ts", "{{ ts }}"],
-        verbose=True
+        verbose=True,
+        conf={"spark.yarn.queue": "batch"}
     )
 
     start >> spark_job >> end
