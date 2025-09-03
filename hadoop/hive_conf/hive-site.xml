@@ -49,5 +49,16 @@
     <name>hive.metastore.hostname</name>
     <value>mysql</value>
   </property>
-
+  <property>
+    <name>hive.execution.engine</name>
+    <value>spark</value>
+  </property>
+  <property>
+    <name>hive.spark.client.connect.timeout</name>
+    <value>10000</value>
+  </property>
+  <property>
+    <name>hive.spark.client.server.connect.attempts</name>
+    <value>2</value>
+  </property>
 </configuration>
