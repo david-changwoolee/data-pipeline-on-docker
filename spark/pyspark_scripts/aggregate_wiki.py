@@ -40,7 +40,7 @@ spark = SparkSession.builder \
 
 spark.sql("use default")
 spark.sql("""create external table if not exists wiki (wiki string, count int)
-    partitioned by (date int, hour int)
+    partitioned by (date string, hour string)
     stored as parquet
     location 'hdfs://hadoop:9000/datawarehouse/data/wiki'""")
 
@@ -51,4 +51,4 @@ aggregated_df = df.groupBy('wiki').count().sort(desc('count')) \
     .limit(10)
 
 aggregated_df.show(truncate=False)
-aggregated_df.write.mode("overwrite").saveAsTable('wiki')
+aggregated_df.write.mode("overwrite").insertInto('wiki')
