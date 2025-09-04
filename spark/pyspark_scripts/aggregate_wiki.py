@@ -12,8 +12,8 @@ def get_args():
     return execution_ts
 
 def parse_args(execution_ts):
-    date_str = execution_ts.split('.')[0]
-    date_format = "%Y-%m-%dT%H:%M:%S"
+    date_str = execution_ts.split(':')[0]
+    date_format = "%Y-%m-%dT%H"
     date = datetime.strptime(date_str, date_format) - timedelta(hours=1)
     year = f"{date.year:04}"
     month = f"{date.month:02}"
