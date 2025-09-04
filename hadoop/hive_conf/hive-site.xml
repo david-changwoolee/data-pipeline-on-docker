@@ -42,12 +42,19 @@
       <value>True</value>
    </property>
    <property>
-    <name>hive.metastore.local</name>
-    <value>false</value>
-  </property>
+      <name>hive.metastore.local</name>
+      <value>false</value>
+   </property>
    <property>
-    <name>hive.metastore.hostname</name>
-    <value>mysql</value>
-  </property>
-
+      <name>hive.execution.engine</name>
+      <value>spark</value>
+   </property>
+   <property>
+      <name>hive.spark.client.connect.timeout</name>
+      <value>10000</value>
+   </property>
+   <property>
+      <name>hive.spark.client.server.connect.attempts</name>
+      <value>2</value>
+   </property>
 </configuration>
