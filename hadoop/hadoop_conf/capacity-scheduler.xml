@@ -14,7 +14,7 @@
     </property>
     <property>
         <name>yarn.scheduler.capacity.root.batch.user-limit-factor</name>
-        <value>1</value>
+        <value>5</value>
     </property>
     <property>
         <name>yarn.scheduler.capacity.root.batch.maximum-capacity</name>
@@ -30,7 +30,7 @@
     </property>
     <property>
         <name>yarn.scheduler.capacity.root.streaming.user-limit-factor</name>
-        <value>1</value>
+        <value>5</value>
     </property>
     <property>
         <name>yarn.scheduler.capacity.root.streaming.maximum-capacity</name>
