@@ -10,8 +10,8 @@
 - Hive : hive v3.1.3 as 'hadoop' custom image
 - Spark : spark v3.5.5 as 'spark' custom image based on Ubuntu
 - Airflow : airflow v2.11.0 as 'airflow' custom image based on Ubuntu
-- Kafka : kafka v4.0.0 as 'apache/kafka' official image
-- MySql : mysql v9.2.0 as 'mysql' official image used as Hive Metastore 
+- Kafka : kafka v4.0.0 as ['apache/kafka' official image](https://hub.docker.com/r/apache/kafka)
+- MySql : mysql v9.2.0 as ['mysql' official image](https://hub.docker.com/_/mysql) used as Hive Metastore 
 
 **Architecture**
 
@@ -46,3 +46,4 @@
 - apache/kafka official image : https://hub.docker.com/r/apache/kafka
 - mysql official image : https://hub.docker.com/_/mysql
 - wiki openAPI : https://stream.wikimedia.org/v2/ui/#/?streams=mediawiki.recentchange
+
