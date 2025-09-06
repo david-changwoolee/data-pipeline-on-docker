@@ -17,7 +17,7 @@ services:
       - '8888:8888'
     volumes:
       - hadoop_config:/opt/hadoop/etc/hadoop
-      - hadoop_hdfs:/opt/hadoop/hdfs
+        #- hadoop_hdfs:/opt/hadoop/hdfs
       - hive_config:/opt/hive/conf
     depends_on:
       - mysql
@@ -52,11 +52,13 @@ services:
       - ./mysql/conf:/docker-entrypoint-initdb.d
     environment:
       MYSQL_ROOT_PASSWORD: root
-  grafana:
-    container_name: 'grafana'
-    image: 'grafana/grafana'
+  metabase:
+    container_name: 'metabase'
+    image: 'metabase/metabase'
     ports:
       - '3000:3000'
+    volumes:
+      - metabase:/metabase.db
   airflow:
     container_name: 'airflow'
     image: 'airflow'
@@ -71,6 +73,7 @@ services:
       - ./airflow/dags:/opt/airflow/dags
       - ./spark/pyspark_scripts:/opt/airflow/pyspark_scripts
       - hadoop_config:/opt/hadoop/etc/hadoop:ro
+      - hive_config:/opt/spark/conf:ro
     depends_on:
       - mysql
   kafka:
@@ -98,7 +101,8 @@ services:
       - kafka:/var/lib/kafka/data
 volumes:
   hadoop_config:
-  hadoop_hdfs:
+    #hadoop_hdfs:
   hive_config:
   mysql:
   kafka:
+  metabase:
