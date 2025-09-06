@@ -38,7 +38,10 @@
    - what aggregate_wiki.py does : aggregates to show top 10 wiki page languages by number of wiki page updates
 4. Metabase generates graph
    - setup
+   - <img width="471" height="762" alt="image" src="https://github.com/user-attachments/assets/65520968-ed64-4d97-b49f-3fe1ddb98221" />
    - graph
+   - <img width="319" height="463" alt="image" src="https://github.com/user-attachments/assets/9c527ea8-824f-4e15-a836-31042e98864f" />
+
 
 **docker commands**
 - docker compose up -d : launch all services
