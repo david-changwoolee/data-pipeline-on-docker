@@ -13,7 +13,7 @@
 - Kafka : kafka v4.0.0 as ['apache/kafka' official image](https://hub.docker.com/r/apache/kafka)
 - MySql : mysql v9.2.0 as ['mysql' official image](https://hub.docker.com/_/mysql) used as Hive Metastore 
 
-**localhost webui**
+**Webui Ports**
 - resource manager : localhost:8088
 - namenode info : localhost:9870
 - datanode info : localhost:9864
@@ -22,7 +22,7 @@
 - jupyter notebook : localhost:9000
 - metabase graph : localhost:3000
 
-**architecture**
+**Architecture**
 <img width="1015" height="378" alt="image" src="https://github.com/user-attachments/assets/91b0da52-70ae-4a72-8e07-3c0c177d7568" />
 
 **Data Flow**
@@ -45,13 +45,13 @@
    - visualizing (graph)
    - <img width="319" height="463" alt="image" src="https://github.com/user-attachments/assets/9c527ea8-824f-4e15-a836-31042e98864f" />
 
-**docker commands**
+**Docker commands**
 - docker compose up -d : launch all services
 - docker compose up -d hadoop spark : launch only 'hadoop' and 'spark' services
 - docker volume ls : list docker volume
 - docker volume rm <data-pipeline-on-docker_hadoop_config> : remove docker volume named data-pipeline-on-docker_hadoop_config
 
-**issues, causes, and solutions**
+**Issues, Causes, and Solutions**
 1. when datanode is not excuted
    - spark log : There are 0 datanode(s) running and 0 node(s) are excluded in this operation.
    - hadoop log : ($HADOOP_HOME/logs datanode log) java.io.IOException: Incompatible clusterIDs in /opt/hadoop/hdfs: namenode clusterID = CID-a3ac82a2-d795-4386-ad0d-355d2d35762b; datanode clusterID = CID-d628459c-a72d-4f54-9b3d-8eace53b77c7
