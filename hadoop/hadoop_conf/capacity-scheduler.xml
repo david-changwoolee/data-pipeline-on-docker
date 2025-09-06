@@ -13,10 +13,6 @@
         <value>RUNNING</value>
     </property>
     <property>
-        <name>yarn.scheduler.capacity.root.batch.user-limit-factor</name>
-        <value>5</value>
-    </property>
-    <property>
         <name>yarn.scheduler.capacity.root.batch.maximum-capacity</name>
         <value>100</value>
     </property>
@@ -27,10 +23,6 @@
     <property>
         <name>yarn.scheduler.capacity.root.streaming.state</name>
         <value>RUNNING</value>
-    </property>
-    <property>
-        <name>yarn.scheduler.capacity.root.streaming.user-limit-factor</name>
-        <value>5</value>
     </property>
     <property>
         <name>yarn.scheduler.capacity.root.streaming.maximum-capacity</name>
