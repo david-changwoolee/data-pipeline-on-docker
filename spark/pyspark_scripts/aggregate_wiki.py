@@ -51,4 +51,4 @@ aggregated_df = df.groupBy('wiki').count().sort(desc('count')) \
     .limit(10)
 
 aggregated_df.show(truncate=False)
-aggregated_df.write.mode("overwrite").insertInto('wiki')
+aggregated_df.write.mode("overwrite").saveAsTable('wiki')
