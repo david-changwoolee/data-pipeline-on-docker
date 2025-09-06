@@ -34,4 +34,10 @@ RUN wget https://repo1.maven.org/maven2/org/apache/spark/spark-hive_2.12/3.5.5/s
 
 RUN mkdir /tmp/spark-events
 WORKDIR /root/jupyter
-CMD ["jupyter", "notebook", "--allow-root", "--port", "9000", "--ip", "0.0.0.0"]
+
+COPY entrypoint.sh /root/entrypoint.sh
+RUN chmod +x /root/entrypoint.sh
+ENTRYPOINT ["/root/entrypoint.sh"]
+CMD ["bash"]
+
+#CMD ["jupyter", "notebook", "--allow-root", "--port", "9000", "--ip", "0.0.0.0"]
